@@ -10,10 +10,6 @@ RUN npm install --production=false --no-audit --prefer-offline
 
 COPY . .
 
-RUN npm run build
-
-FROM nginx:alpine
-
 EXPOSE 65437
 
 CMD ["npm", "run", "start"]
