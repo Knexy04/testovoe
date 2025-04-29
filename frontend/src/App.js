@@ -18,7 +18,7 @@ const App = () => {
   const loadData = useCallback(async (reset = false) => {
     try {
       const currentOffset = reset ? 0 : offset;
-      const { data } = await axios.get('http://localhost:3001/api/items', {
+      const { data } = await axios.get('http://194.164.234.10:3001/api/items', {
         params: { query: search, offset: currentOffset, limit: 20 }
       });
 
@@ -37,8 +37,8 @@ const App = () => {
     const initialize = async () => {
       try {
         const [state, data] = await Promise.all([
-          axios.get('http://localhost:3001/api/state'),
-          axios.get('http://localhost:3001/api/items', { params: { offset: 0 } })
+          axios.get('http://194.164.234.10:3001/api/state'),
+          axios.get('http://194.164.234.10:3001/api/items', { params: { offset: 0 } })
         ]);
 
         setSelectedIds(new Set(state.data.selectedIds));
@@ -63,7 +63,7 @@ const App = () => {
     newSelected.has(item) ? newSelected.delete(item) : newSelected.add(item);
     
     try {
-      await axios.post('http://localhost:3001/api/state', {
+      await axios.post('http://194.164.234.10:3001/api/state', {
         selectedIds: Array.from(newSelected),
         sortedOrder: items
       });
@@ -109,7 +109,7 @@ const App = () => {
 
     try {
       setItems(newItems);
-      await axios.post('http://localhost:3001/api/state', {
+      await axios.post('http://194.164.234.10:3001/api/state', {
         selectedIds: Array.from(selectedIds),
         sortedOrder: newItems
       });

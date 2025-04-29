@@ -10,6 +10,8 @@ RUN npm install --production=false --no-audit --prefer-offline
 
 COPY . .
 
-EXPOSE 65437
+RUN npm run build
+
+EXPOSE 3000
 
 CMD ["npm", "run", "start"]
