@@ -19,7 +19,7 @@ services:
     container_name: testovoe-frontend
     restart: unless-stopped
     ports:
-      - "65437:65437"
+      - "3000:3000"
     depends_on:
       - backend
     networks:
