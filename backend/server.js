@@ -6,18 +6,15 @@ const port = 3001;
 app.use(cors());
 app.use(express.json());
 
-// Состояние приложения
 let appState = {
   selectedIds: [],
   sortedOrder: []
 };
 
-// Генерация данных с учетом сортировки
 const generateItems = (query, offset, limit) => {
   let items = [];
   const start = query ? Math.max(1, parseInt(query) || 1) : 1;
   
-  // Фильтрация
   for (let i = start; i <= 1000000; i++) {
     if (!query || i.toString().includes(query)) {
       items.push(i);
@@ -25,7 +22,6 @@ const generateItems = (query, offset, limit) => {
     }
   }
 
-  // Применение сортировки
   if (appState.sortedOrder.length > 0) {
     const sortedSet = new Set(appState.sortedOrder);
     const orderedItems = appState.sortedOrder.filter(id => items.includes(id));
@@ -36,7 +32,6 @@ const generateItems = (query, offset, limit) => {
   return items.slice(offset, offset + limit);
 };
 
-// API Endpoints
 app.get('/api/items', (req, res) => {
   const { query = '', offset = 0, limit = 20 } = req.query;
   const items = generateItems(query, parseInt(offset), parseInt(limit));
